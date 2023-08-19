@@ -109,7 +109,7 @@ export class _Parser {
           l2 = token.header.length;
           for (j = 0; j < l2; j++) {
             cell += this.renderer.tablecell(
-              this.parseInline(token.header[j].tokens)!,
+              this.parseInline(token.header[j].tokens ?? [])!,
               { header: true, align: token.align[j] }
             );
           }
@@ -124,7 +124,7 @@ export class _Parser {
             l3 = row.length;
             for (k = 0; k < l3; k++) {
               cell += this.renderer.tablecell(
-                this.parseInline(row[k].tokens)!,
+                this.parseInline(row[k].tokens ?? [])!,
                 { header: false, align: token.align[k] }
               );
             }
@@ -155,13 +155,13 @@ export class _Parser {
             if (item.task) {
               checkbox = this.renderer.checkbox(!!checked);
               if (loose) {
-                if (item.tokens.length > 0 && item.tokens[0].type === 'paragraph') {
-                  item.tokens[0].text = checkbox + ' ' + item.tokens[0].text;
-                  if (item.tokens[0].tokens && item.tokens[0].tokens.length > 0 && item.tokens[0].tokens[0].type === 'text') {
-                    item.tokens[0].tokens[0].text = checkbox + ' ' + item.tokens[0].tokens[0].text;
+                if (item.tokens!.length > 0 && item.tokens![0].type === 'paragraph') {
+                  item.tokens![0].text = checkbox + ' ' + item.tokens![0].text;
+                  if (item.tokens![0].tokens && item.tokens![0].tokens.length > 0 && item.tokens![0].tokens[0].type === 'text') {
+                    item.tokens![0].tokens[0].text = checkbox + ' ' + item.tokens![0].tokens[0].text;
                   }
                 } else {
-                  item.tokens.unshift({
+                  item.tokens!.unshift({
                     type: 'text',
                     text: checkbox
                   } as Tokens.Text);
@@ -171,7 +171,7 @@ export class _Parser {
               }
             }
 
-            itemBody += this.parse(item.tokens, loose);
+            itemBody += this.parse(item.tokens!, loose);
             body += this.renderer.listitem(itemBody, task, !!checked);
           }
 

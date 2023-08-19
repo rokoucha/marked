@@ -19,8 +19,7 @@ export type Token = (Tokens.Space
     | Tokens.Em
     | Tokens.Codespan
     | Tokens.Br
-    | Tokens.Del
-    | Tokens.Generic) & { loose?: boolean, tokens?: Token[] };
+    | Tokens.Del) & { loose?: boolean, tokens?: Token[] };
 
 export namespace Tokens {
     export interface Space {
@@ -182,14 +181,6 @@ export namespace Tokens {
         raw: string;
         text: string;
         tokens: Token[];
-    }
-
-    export interface Generic {
-        [index: string]: any;
-
-        type: string;
-        raw: string;
-        tokens?: Token[] | undefined;
     }
 }
 

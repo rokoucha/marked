@@ -1,4 +1,4 @@
-import type { Token, Tokens, TokensList } from './Tokens.ts';
+import type { Token, TokensList } from './Tokens.ts';
 import type { _Parser } from './Parser.ts';
 import type { _Lexer } from './Lexer.ts';
 import type { _Renderer } from './Renderer.ts';
@@ -17,7 +17,7 @@ export interface TokenizerExtension {
   name: string;
   level: 'block' | 'inline';
   start?: ((this: TokenizerThis, src: string) => number | void) | undefined;
-  tokenizer: (this: TokenizerThis, src: string, tokens: Token[] | TokensList) => Tokens.Generic | undefined;
+  tokenizer: (this: TokenizerThis, src: string, tokens: Token[] | TokensList) => Token | undefined;
   childTokens?: string[] | undefined;
 }
 
@@ -25,7 +25,7 @@ export interface RendererThis {
   parser: _Parser;
 }
 
-export type RendererExtensionFunction = (this: RendererThis, token: Tokens.Generic) => string | false | undefined;
+export type RendererExtensionFunction = (this: RendererThis, token: Token) => string | false | undefined;
 
 export interface RendererExtension {
   name: string;

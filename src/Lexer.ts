@@ -1,7 +1,7 @@
 import { _Tokenizer } from './Tokenizer.ts';
 import { _defaults } from './defaults.ts';
 import { block, inline } from './rules.ts';
-import type { Token, TokensList, Tokens } from './Tokens.ts';
+import type { Token, TokensList } from './Tokens.ts';
 import type { MarkedOptions, TokenizerExtension } from './MarkedOptions.ts';
 import type { Rules } from './rules.ts';
 
@@ -154,7 +154,7 @@ export class _Lexer {
       });
     }
 
-    let token: Tokens.Generic | undefined;
+    let token: Token | undefined;
     let lastToken;
     let cutSrc;
     let lastParagraphClipped;
